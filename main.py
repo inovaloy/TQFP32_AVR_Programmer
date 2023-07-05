@@ -4,9 +4,17 @@ import sys
 import subprocess
 import re
 
-FIRMWARE_BUILD = "build"
-FIRMWARE_FLASH = "flash"
-CONTROLLER_DETECT = "detect"
+FIRMWARE_BUILD           = "build"
+FIRMWARE_FLASH           = "flash"
+CONTROLLER_DETECT        = "detect"
+
+ATMEGA8A_SIGNATURE       = "0x1e9307"
+ATMEGA328PU_SIGNATURE    = "0x1e950f"
+ATMEGA328PB_SIGNATURE    = "0x1e9516"
+
+ATMEGA8A_NAME_STRING     = "Atmega8A"
+ATMEGA328PU_NAME_STRING  = "Atmega328PU"
+ATMEGA328PB_NAME_STRING  = "Atmega328PB"
 
 class Builder:
     def __init__(self, mode):
@@ -56,12 +64,12 @@ class Builder:
             return
 
         if signatureFound:
-            if signature == "0x1e9307":
-                print("Controller: Atmega8A")
-            elif signature == "0x1e950f":
-                print("Controller: Atmega328PU")
-            elif signature == "0x1e9516":
-                print("Controller: Atmega328PB")
+            if signature == ATMEGA8A_SIGNATURE:
+                print("Controller:", ATMEGA8A_NAME_STRING)
+            elif signature == ATMEGA328PU_SIGNATURE:
+                print("Controller:", ATMEGA328PU_NAME_STRING)
+            elif signature == ATMEGA328PB_SIGNATURE:
+                print("Controller:", ATMEGA328PB_NAME_STRING)
             else:
                 print("Unknown Controller")
 
